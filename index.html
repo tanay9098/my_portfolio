@@ -442,6 +442,26 @@
     }
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
+    /* ── Project Image Slot ── */
+    .project-img-slot {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 10px; text-align: center; padding: 20px;
+    }
+    .project-img-slot-icon {
+      width: 52px; height: 52px; border-radius: 12px;
+      border: 2px dashed rgba(99,102,241,.35);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; background: rgba(99,102,241,.07);
+    }
+    .project-img-slot-label {
+      font-size: .75rem; color: var(--text-muted); font-weight: 600;
+      letter-spacing: .3px; max-width: 180px; line-height: 1.4;
+    }
+    .project-img-slot-hint {
+      font-size: .67rem; color: var(--text-faint); font-style: italic;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 900px) {
       #about .about-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -467,10 +487,12 @@
       .timeline::before { left: 0; }
       .timeline-item { flex-direction: column; }
       .timeline-dot { display: none; }
+      .timeline::before { display: none; }
     }
     @media (max-width: 480px) {
       .about-stats { grid-template-columns: 1fr; }
       .github-grid { grid-template-columns: 1fr 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -502,14 +524,6 @@
     <a href="#projects" class="mobile-link">Projects</a>
     <a href="#github" class="mobile-link">GitHub</a>
     <a href="#contact" class="mobile-link">Contact</a>
-  </div>
-
-  <!-- ── Availability Strip ── -->
-  <div class="availability-strip" style="margin-top:70px">
-    <div class="availability-strip-inner">
-      ✦ Available for remote roles &nbsp;&nbsp;&nbsp; ✦ Open to freelance projects &nbsp;&nbsp;&nbsp; ✦ UK/EU timezone overlap &nbsp;&nbsp;&nbsp; ✦ US Eastern 3–4hr overlap &nbsp;&nbsp;&nbsp; ✦ Full-stack development &nbsp;&nbsp;&nbsp; ✦ Web3 &amp; blockchain &nbsp;&nbsp;&nbsp; ✦ AI-integrated applications &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      ✦ Available for remote roles &nbsp;&nbsp;&nbsp; ✦ Open to freelance projects &nbsp;&nbsp;&nbsp; ✦ UK/EU timezone overlap &nbsp;&nbsp;&nbsp; ✦ US Eastern 3–4hr overlap &nbsp;&nbsp;&nbsp; ✦ Full-stack development &nbsp;&nbsp;&nbsp; ✦ Web3 &amp; blockchain &nbsp;&nbsp;&nbsp; ✦ AI-integrated applications &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </div>
   </div>
 
   <!-- ── Hero ── -->
@@ -578,7 +592,7 @@
             applications that leverage LLMs to solve everyday problems.
           </p>
           <p>
-            Currently completing my <strong>MCA at PES University</strong>, Bengaluru, I interned as a
+            An <strong>MCA graduate of PES University</strong> (June 2026), Bengaluru, I interned as a
             Software Engineer at PESU Hospital where I built an indoor navigation system using
             <strong>A* pathfinding algorithms</strong> and REST APIs consumed by a Flutter frontend —
             cutting manual navigation steps by 60%.
@@ -700,7 +714,7 @@
         </div>
         <div class="skill-group fade-in stagger-3">
           <div class="skill-group-icon">🔐</div>
-          <div class="skill-group-title">Security / Auth</div>
+          <div class="skill-group-title">Auth &amp; Data Security</div>
           <div class="skill-tags">
             <span class="skill-tag">AES-256 Encryption</span>
             <span class="skill-tag">Web Crypto API</span>
@@ -726,7 +740,7 @@
           <div class="timeline-content">
             <div class="timeline-header">
               <div>
-                <div class="timeline-role">Software Engineer Intern</div>
+                <h3 class="timeline-role">Software Engineer Intern</h3>
                 <div class="timeline-company">PESU Hospital</div>
               </div>
               <div class="timeline-date">Mar 2026 – May 2026</div>
@@ -758,7 +772,11 @@
         <div class="project-card featured fade-in stagger-1">
           <div class="project-visual">
             <div class="project-visual-grid"></div>
-            <span class="project-emoji">🧠</span>
+            <div class="project-img-slot">
+              <div class="project-img-slot-icon">📸</div>
+              <div class="project-img-slot-label">Bouncy Brain — Task Dashboard</div>
+              <div class="project-img-slot-hint">[ replace with screenshot or demo GIF ]</div>
+            </div>
           </div>
           <div class="project-body">
             <div class="project-tags">
@@ -768,18 +786,10 @@
               <span class="project-tag tag-blue">MongoDB</span>
               <span class="project-tag tag-purple">ML</span>
             </div>
-            <div class="project-name">Bouncy Brain</div>
+            <h3 class="project-name">Bouncy Brain</h3>
             <p class="project-desc">
-              An ADHD-focused productivity app that combines an intelligent notification engine with a
-              Flask-based ML microservice for personalized task recommendations. Built with neurodivergent
-              users in mind, Bouncy Brain adapts to individual focus patterns rather than forcing a
-              one-size-fits-all productivity system.
+              Standard productivity apps assume neurotypical focus patterns, making them actively counterproductive for ADHD users who need adaptive — not rigid — scheduling. Built a Flask ML microservice that learns each user's focus windows and task-completion history to surface personalized scheduling nudges, wired to a smart notification engine on a Node/MongoDB backend. Shipped the full-stack app with ADHD-friendly UX — minimal visual noise, break reminders, and adaptive task chunking.
             </p>
-            <div style="margin-bottom:16px; font-size:.85rem; color:var(--text-muted);">
-              ✦ ML-powered personalized recommendations<br/>
-              ✦ Smart notification engine<br/>
-              ✦ ADHD-friendly UX patterns
-            </div>
             <div class="project-links">
               <a href="https://github.com/tanay9098/Bouncy-Brain" target="_blank" rel="noopener" class="project-link">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
@@ -793,7 +803,11 @@
         <div class="project-card fade-in stagger-2">
           <div class="project-visual" style="background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(239,68,68,.1))">
             <div class="project-visual-grid"></div>
-            <span class="project-emoji">⚡</span>
+            <div class="project-img-slot">
+              <div class="project-img-slot-icon">📸</div>
+              <div class="project-img-slot-label">PokeDex — NFT Battle Arena</div>
+              <div class="project-img-slot-hint">[ replace with screenshot or demo GIF ]</div>
+            </div>
           </div>
           <div class="project-body">
             <div class="project-tags">
@@ -802,11 +816,9 @@
               <span class="project-tag tag-blue">React Native</span>
               <span class="project-tag tag-green">Polygon</span>
             </div>
-            <div class="project-name">PokeDex — NFT Platform</div>
+            <h3 class="project-name">PokeDex — NFT Platform</h3>
             <p class="project-desc">
-              A Web3 NFT trading and battle platform on Polygon Amoy. Solidity smart contracts handle battle
-              logic, listings, and offers. MetaMask + ethers.js v6 integration for seamless wallet
-              connectivity across web and mobile.
+              Existing NFT platforms separate asset trading from gameplay, handling battle mechanics off-chain and requiring users to trust a centralised server. Wrote Solidity smart contracts on Polygon Amoy to handle battle resolution, listings, and peer-to-peer offers; integrated ethers.js v6 for wallet connectivity across a React web app and a React Native mobile client. Battle outcomes are settled entirely on-chain, removing any server-side trust requirement.
             </p>
             <div class="project-links">
               <a href="https://github.com/tanay9098/PokeDex" target="_blank" rel="noopener" class="project-link">
@@ -821,7 +833,11 @@
         <div class="project-card fade-in stagger-3">
           <div class="project-visual" style="background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(6,182,212,.1))">
             <div class="project-visual-grid"></div>
-            <span class="project-emoji">🌟</span>
+            <div class="project-img-slot">
+              <div class="project-img-slot-icon">📸</div>
+              <div class="project-img-slot-label">Girigo — Wish Dashboard</div>
+              <div class="project-img-slot-hint">[ replace with screenshot or demo GIF ]</div>
+            </div>
           </div>
           <div class="project-body">
             <div class="project-tags">
@@ -830,11 +846,9 @@
               <span class="project-tag tag-purple">Redis</span>
               <span class="project-tag tag-orange">BullMQ</span>
             </div>
-            <div class="project-name">Girigo — Wish App</div>
+            <h3 class="project-name">Girigo — Wish App</h3>
             <p class="project-desc">
-              A K-drama inspired wish-making PWA with client-side AES-256 encryption via the Web Crypto API
-              and Supabase Row-Level Security. Uses BullMQ + Redis for job-queue-driven scheduled push
-              notifications — because every wish deserves a reminder.
+              Most wish-list apps store personal content in plaintext on the server, making it readable by the provider. Chose client-side AES-256 encryption via the Web Crypto API so data is encrypted before leaving the browser, layered with Supabase Row-Level Security; added BullMQ + Redis to schedule reliable push notifications for pending wishes. Delivered a PWA with zero server-readable user content and cross-platform push delivery, installable directly from the browser.
             </p>
             <div class="project-links">
               <a href="https://github.com/tanay9098/Girigo" target="_blank" rel="noopener" class="project-link">
@@ -927,14 +941,14 @@
       <div class="education-grid">
         <div class="edu-card fade-in stagger-1">
           <div class="edu-badge">Postgraduate</div>
-          <div class="edu-degree">Master of Computer Applications (MCA)</div>
+          <h3 class="edu-degree">Master of Computer Applications (MCA)</h3>
           <div class="edu-school">PES University</div>
           <div class="edu-location">Bengaluru, Karnataka</div>
           <div class="edu-year">Graduated June 2026</div>
         </div>
         <div class="edu-card fade-in stagger-2">
           <div class="edu-badge">Undergraduate</div>
-          <div class="edu-degree">Bachelor of Computer Applications (BCA)</div>
+          <h3 class="edu-degree">Bachelor of Computer Applications (BCA)</h3>
           <div class="edu-school">BBD University</div>
           <div class="edu-location">Lucknow, Uttar Pradesh</div>
           <div class="edu-year">Graduated June 2023</div>
