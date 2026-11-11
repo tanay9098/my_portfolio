@@ -35,36 +35,51 @@ images in `assets/`.
   through that section, on a blurred background.
 - Page gutters: 24px on mobile, 48px from 768px, 96px from 1024px.
 - Vertical spacing: sections are separated by 64 / 96 / 144px (mobile / tablet / desktop).
-- There is no top navbar and no footer.
+- There is no top navbar and no footer. The only fixed control is the theme toggle (top-right).
 
 ## 2. Colour
 
-The palette is dark navy and slate. **Text is white or grey only.** No purple, violet or blue
-text, gradients or glows on text.
+Two themes: **dark (ink)** and **light (paper)**. The neutrals match princepal.dev; the accent
+comes from the "Cyber Lime & Ink + Violet" palette (`#C6F36B`). Text is neutral black, white or
+grey. The accent (lime in dark, violet in light) is used only for tech pills, text selection
+and the cursor glow.
 
-| Token              | Value                      | Use                                            |
-|--------------------|----------------------------|------------------------------------------------|
-| `--bg`             | `#0f172a`                  | Page background (navy)                         |
-| `--surface-hover`  | `rgba(30,41,59,.5)`        | Card or row background on hover                |
-| `--heading`        | `#e2e8f0`                  | Name, headings, titles, bold text in body copy |
-| `--white`          | `#ffffff`                  | Hovered or active headings and links           |
-| `--text`           | `#94a3b8`                  | Body copy                                      |
-| `--muted`          | `#64748b`                  | Dates, labels, inactive nav, captions          |
-| `--line`           | `rgba(226,232,240,.1)`     | Hairline borders, thumbnail frames             |
-| `--line-hover`     | `rgba(226,232,240,.3)`     | Border on hover                                |
-| `--pill-bg`        | `rgba(45,212,191,.1)`      | Tech-pill background                           |
-| `--pill-text`      | `#5eead4`                  | Tech-pill text                                 |
-| `--spotlight`      | `rgba(29,78,216,.15)`      | Glow that follows the cursor (background only) |
+The theme follows the visitor's system setting on first visit. A small sun/moon button fixed in
+the top-right corner switches it, and the choice is saved in `localStorage` (`theme`). A tiny
+inline script in `<head>` sets `data-theme` on `<html>` before first paint, so there is no flash.
+Dark tokens live on `:root`; light tokens override them on `:root[data-theme="light"]`.
 
-- **Tech pills** are the only coloured element (soft teal). To make them monochrome too, set
-  `--pill-bg: rgba(226,232,240,.08)` and `--pill-text: #e2e8f0`.
+| Token              | Dark                       | Light                      | Use                                     |
+|--------------------|----------------------------|----------------------------|-----------------------------------------|
+| `--bg`             | `#0b0b0b`                  | `#ffffff`                  | Page background                         |
+| `--bg-blur`        | `rgba(11,11,11,.75)`       | `rgba(255,255,255,.75)`    | Sticky section heading (mobile)         |
+| `--surface`        | `#202020`                  | `#f5f5f5`                  | Avatar circle                           |
+| `--surface-hover`  | `#141414`                  | `#f5f5f5`                  | Card or row background on hover         |
+| `--heading`        | `#e8e8e8`                  | `#0a0a0a`                  | Name, headings, titles, bold body text  |
+| `--white`          | `#ffffff`                  | `#000000`                  | Hovered or active headings and links    |
+| `--text`           | `#a3a3a3`                  | `#525252`                  | Body copy                               |
+| `--muted`          | `#858585`                  | `#737373`                  | Dates, labels, inactive nav, captions   |
+| `--line`           | `rgba(232,232,232,.12)`    | `#e5e5e5`                  | Hairline borders, thumbnail frames      |
+| `--line-hover`     | `rgba(232,232,232,.3)`     | `#d4d4d4`                  | Border on hover                         |
+| `--accent`         | `#c6f36b` (cyber lime)     | `#6d28d9` (violet)         | Accent colour                           |
+| `--pill-bg`        | `rgba(198,243,107,.1)`     | `rgba(124,58,237,.08)`     | Tech-pill background                    |
+| `--pill-text`      | `#c6f36b`                  | `#6d28d9`                  | Tech-pill text                          |
+| `--selection-bg`   | `#c6f36b`                  | `rgba(124,58,237,.2)`      | Text selection background               |
+| `--selection-text` | `#0b0b0b`                  | `#0a0a0a`                  | Text selection colour                   |
+| `--spotlight`      | `rgba(139,92,246,.1)`      | `rgba(124,58,237,.06)`     | Glow that follows the cursor            |
+
+- **Tech pills** are the main coloured element. To make them monochrome, set
+  `--pill-bg: var(--surface-hover)` and `--pill-text: var(--heading)` in both themes.
 - **Spotlight:** a 600px radial gradient sits behind all content and follows the mouse. It only
   runs on devices with a fine pointer that hover. It lights the background and never colours text.
-- **Selection:** teal-tinted background with white text.
+- `theme-color` meta is updated to match the active theme.
 
 ## 3. Typography
 
-- **Font:** Inter (Google Fonts), weights 400, 500, 600, 700. System sans-serif is the fallback.
+- **Content font:** Geist Mono (Google Fonts), weights 400, 500, 600, 700. Fallback: SF Mono,
+  Monaco, Cascadia Code, system monospace. Used for everything except the section nav.
+- **UI font:** Hanken Grotesk (Google Fonts), weights 400–700. Used for the section nav labels.
+  Fallback: system sans-serif.
 - **Base:** 16px, line-height 1.625, antialiased.
 
 | Element              | Size / weight                     | Colour      |
@@ -72,7 +87,7 @@ text, gradients or glows on text.
 | Name (`h1`)          | 36px → 48px (sm+), 700, tight     | `--heading` |
 | Title (`h2`)         | 18px → 20px, 500                  | `--heading` |
 | Tagline              | 16px, 400, max 320px wide         | `--text`    |
-| Nav label            | 12px, 700, uppercase, wide track  | muted → heading |
+| Nav label (sans)     | 12px, 700, uppercase, wide track  | muted → heading |
 | Section heading      | 14px, 700, uppercase, wide track  | `--heading` |
 | Item title           | 16px, 500                         | `--heading` |
 | Body / description   | 14–16px, 400                      | `--text`    |
@@ -89,6 +104,12 @@ Bold text inside body copy uses `--heading` (500 weight) and is never coloured.
 - Hover or active: line grows to 64px and both turn `--heading`. Transition is 150ms.
 - The active item follows the scroll position. The URL hash updates to match the active
   section, using `history.replaceState` so no history entries are added.
+
+### Theme toggle
+- 36px square button fixed at the top-right corner (12px inset), above all content. It does not
+  take part in the page layout.
+- Shows a moon in dark mode and a sun in light mode, 18px, `--text` turning `--heading` on hover
+  with a `--surface-hover` background. Its `aria-label` names the theme it switches to.
 
 ### Social icons (left column, bottom)
 - 24px icons in `--text`, turning `--heading` on hover. Each has an `aria-label`.
